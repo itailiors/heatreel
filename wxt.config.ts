@@ -6,6 +6,8 @@ export default defineConfig({
   manifest: {
     name: 'HeatReel',
     description: 'Play the "Most Replayed" moments of a YouTube video as a highlight reel.',
+    // Shown as the extension's website on chrome://extensions.
+    homepage_url: 'https://github.com/itailiors/heatreel',
     // Lets the popup and keyboard shortcuts read the active tab's URL.
     permissions: ['activeTab'],
     // Chrome rejects the manifest if more than 4 commands have a suggested_key,

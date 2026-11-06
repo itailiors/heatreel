@@ -32,6 +32,7 @@ h1 {
 
 .live {
   margin-left: auto;
+  margin-right: 4px;
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -53,6 +54,34 @@ h1 {
   50% {
     opacity: 0.35;
   }
+}
+
+/* GitHub link: pinned to the right, next to "Playing" when it's shown. */
+.gh-link {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  margin-left: auto;
+  border-radius: 8px;
+  color: var(--muted);
+  transition:
+    color 120ms ease,
+    background 120ms ease;
+}
+
+.live + .gh-link {
+  margin-left: 0;
+}
+
+.gh-link:hover {
+  color: var(--fg);
+  background: var(--surface);
+}
+
+.gh-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
 }
 
 /* ---------- Buttons ---------- */
