@@ -1,0 +1,36 @@
+# Based on ~/.claude/templates/ci/node.yml. Checks = CLAUDE.md "Definition of done".
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+jobs:
+  check:
+    name: Compile and build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install
+        run: npm ci # postinstall runs `wxt prepare`
+
+      - name: Typecheck
+        run: npm run compile
+
+      - name: Build
+        run: npm run build
