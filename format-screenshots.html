@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>HeatReel – Store Screenshots (1280 × 800)</title>
+<style>
+  /*
+   * Chrome Web Store screenshots: exactly 1280 × 800, fully opaque.
+   * Images load from store-assets/screenshots/ next to this file.
+   */
+  * { box-sizing: border-box; margin: 0; }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 20px 10px;
+    background: #8a8a92; /* neutral grey so the frame edges are obvious when snipping */
+    font-family: Inter, 'Segoe UI', system-ui, sans-serif;
+  }
+
+  .shot {
+    position: relative;
+    flex: none;
+    width: 1280px;
+    height: 800px;
+    margin-bottom: 50px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Solid base first, so nothing is ever transparent. */
+    background-color: #111113;
+    background-image:
+      radial-gradient(ellipse 45% 60% at 50% 50%, rgba(255, 90, 31, 0.22) 0%, rgba(255, 90, 31, 0) 70%),
+      linear-gradient(135deg, #0f0f11 0%, #17151a 40%, #2a1214 75%, #4a170d 100%);
+  }
+
+  /* Subtle dotted texture so the dark area doesn't look flat. */
+  .shot::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 22px 22px;
+    pointer-events: none;
+  }
+
+  /* ---------- 1 & 2: floating popup UI ---------- */
+
+  /* Wrapper carries the shadow so the image itself can be clipped. */
+  .shot .float-wrap {
+    position: relative; /* above the texture */
+    filter:
+      drop-shadow(0 30px 60px rgba(0, 0, 0, 0.55))
+      drop-shadow(0 0 40px rgba(255, 80, 30, 0.18));
+    transform: translateY(-4px);
+  }
+
+  .shot .float {
+    display: block;
+    width: auto;
+    border-radius: 14px;
+    clip-path: inset(0 round 14px);
+  }
+
+  /* Scaled up modestly: these captures are small, so larger would blur. */
+  #shot-1 .float {
+    height: 640px; /* 319 × 486 source */
+    /* The capture includes 2px of window border + page on the right/bottom. */
+    clip-path: inset(0 0.63% 0.42% 0 round 14px);
+  }
+  #shot-2 .float { height: 690px; } /* 328 × 595 source */
+
+  /* ---------- 3: full-bleed landscape ---------- */
+
+  #shot-3 .cover {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* The source is wider than 16:10; crop from the left so the HeatReel
+       popup on the right edge stays fully in frame. */
+    object-position: right center;
+  }
+
+  /* ---------- Snipping helper ---------- */
+
+  .scale-note {
+    max-width: 720px;
+    margin-bottom: 30px;
+    font: 500 13px/1.45 Inter, 'Segoe UI', system-ui, sans-serif;
+    color: #1d1d21;
+    text-align: center;
+  }
+  .scale-note:empty { display: none; }
+</style>
+</head>
+<body>
+
+  <p class="scale-note" id="scale-note"></p>
+
+  <div class="shot" id="shot-1">
+    <div class="float-wrap">
+      <img class="float" src="store-assets/screenshots/Screenshot%202026-11-06%20201757.png" alt="HeatReel popup">
+    </div>
+  </div>
+
+  <div class="shot" id="shot-2">
+    <div class="float-wrap">
+      <img class="float" src="store-assets/screenshots/Screenshot%202026-11-06%20201859.png" alt="HeatReel popup while a reel is playing">
+    </div>
+  </div>
+
+  <div class="shot" id="shot-3">
+    <img class="cover" src="store-assets/screenshots/Screenshot%202026-11-06%20201745.png" alt="HeatReel running on a YouTube video">
+  </div>
+
+<script>
+  /*
+   * Windows display scaling or browser zoom makes a 1280px box snip larger
+   * than 1280px. Shrink the frames by the same factor so a snip is exact.
+   */
+  function fitToScreenPixels() {
+    const dpr = window.devicePixelRatio || 1;
+    document.querySelectorAll('.shot').forEach((el) => {
+      el.style.zoom = dpr === 1 ? '' : String(1 / dpr);
+    });
+    document.getElementById('scale-note').textContent = dpr === 1
+      ? ''
+      : `Your screen scaling is ${Math.round(dpr * 100)}%, so the frames are shown smaller here ` +
+        `to make a snip come out at exactly 1280 × 800. Set browser zoom to 100% (Ctrl+0) first.`;
+  }
+  fitToScreenPixels();
+  window.addEventListener('resize', fitToScreenPixels);
+</script>
+</body>
+</html>
