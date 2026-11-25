@@ -14,6 +14,14 @@ stats-*.json
 .wxt
 web-ext.config.ts
 
+# Scratch files used while building the store listing
+store-assets/_tmp/
+
+# Secrets
+.env
+.env.*
+!.env.example
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
