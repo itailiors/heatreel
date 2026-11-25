@@ -18,6 +18,9 @@ https://github.com/user-attachments/assets/99931c5e-3874-4725-ad0c-0231688f5e03
 HeatReel is a Chrome extension that reads YouTube's "Most Replayed" heatmap and plays just the
 best parts of a video, back to back. One click, no setup.
 
+**[Add to Chrome: free on the Chrome Web Store](https://chromewebstore.google.com/detail/pljkjcipfkonmhnhfkfjbhjjkbhpfihf)**
+· [Product page](https://itailiors.github.io/portfolio-hub/products/heatreel/)
+
 ## Features
 
 - **Smart Auto Reel**: analyses the whole heatmap statistically (mean + standard deviation) to find
